@@ -1,0 +1,19 @@
+name: Build Java Application
+on:
+  push:
+    branches:
+      - master
+jobs:
+  buildJob:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone the Repository
+        uses: actions/checkout@v5
+      - name: Install Java 17 and Maven
+        uses: actions/setup-java@v5
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+          cache: 'maven'
+      - name: Build the Java Application and Package It
+        run: mvn clean install package
